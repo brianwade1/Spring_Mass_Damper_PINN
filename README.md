@@ -25,9 +25,9 @@ The [requirements.txt](requirements.txt) allows the user to create an environmen
 
 acceleration(t+1) = acceleration(t) - (spring_force + damper_force) / mass
 
-velocity(t+1) = velocity(t) + (acceleration(t+1) * self.dt
+velocity(t+1) = velocity(t) + acceleration(t+1) * dt
 
-position(t+1) = position(t) + (velocity(t+1) * dt)
+position(t+1) = position(t) + velocity(t+1) * dt
 
 Using the system parameters:
 
