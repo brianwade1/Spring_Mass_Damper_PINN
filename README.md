@@ -47,15 +47,15 @@ Results in the over damped oscillations below:
 
 ## Physics Informed Neural Net
 
-The PINN is created by including the physics loss into the overall neural net's loss calculations. Normally, a neural net tryes to minimize the difference between it's prediction (y_hat) and the true output (y) using mean squared error (MSE) or a similar metric.
+The PINN is created by including the physics loss into the overall neural net's loss calculations. Normally, a neural net tries to minimize the difference between it's prediction (y_hat) and the true output (y) using mean squared error (MSE) or a similar metric.
 
 MSE = (y_hat - y)^2
 
-PINNs include additional terms into the loss function which can include the physics loss, boundry condition loss, and initial condition loss. In this example only the physics loss is explicity calculated. The boundry loss is included in the MSE calculations. The spring-mass-damper is described by the partical differential equation:
+PINNs include additional terms into the loss function which can include the physics loss, boundary condition loss, and initial condition loss. In this example only the physics loss is explicitly calculated. The boundary loss is included in the MSE calculations. The spring-mass-damper is described by the partial differential equation:
 
 acceleration(t) + DAMPING_COEFFICIENT * velocity(t) + SPRING_COEFFICIENT * position(t) = 0
 
-The (auto differentiation) [https://pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html] function within most neural net packages allows the program to find the velocty (derivative of postition) and accelerate (derivative of velocity) fairly easy. Thus, as the neural net is training, it can predict the position for a set of points during the forward pass. We then use auto differntiation to find the velocity and acceleration of those points.
+The (auto differentiation) [https://pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html] function within most neural net packages allows the program to find the velocity (derivative of position) and accelerate (derivative of velocity) fairly easy. Thus, as the neural net is training, it can predict the position for a set of points during the forward pass. We then use auto differentiation to find the velocity and acceleration of those points.
 
 This allows us to use the full loss function:
 
@@ -65,7 +65,7 @@ J = L_MSE + L_physics.
 
 To show the benefits of PINNs, the training data is sampled from only half of the full 1-D space. The training data consists of 20 equally-spaced points between 0 and 0.5 seconds.
 
-![TrainingData](Images\training_data.png)
+![TrainingData](/Images/training_data.png)
 
 During the calculation of the physics loss for the PINN, an additional set of points are also calculated using only the forward pass of the neural network. These 500 points span from 0 to 1 second.
 
@@ -73,11 +73,11 @@ During the calculation of the physics loss for the PINN, an additional set of po
 
 A neural net trained with only the MSE loss results in a good in-sample fit, but fails to generalize to new data as seen below.
 
-![training_results_noPINN](/Images\training_results_standard_loss_function.png)
+![training_results_noPINN](/Images/training_results_standard_loss_function.png)
 
 Using a PINN approach, the neural net is trained not only on the training data, but also on the physics of the problem. This results in a neural net that is able to extrapolate outside of the training data with a high degree of accuracy.
 
-![training_results_withPINN](/Images\training_results_with_physics_informed.png)
+![training_results_withPINN](/Images/training_results_with_physics_informed.png)
 
 ---
 
