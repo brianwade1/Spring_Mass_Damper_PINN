@@ -37,7 +37,7 @@ Using the system parameters:
 
 and the initial conditions:
 
-* Position(0) = 15 m
+* Position(0) = 1 m
 * Velocity(0) = 0 m/s
 * Acceleration(0) = 0 m/s^2
 
